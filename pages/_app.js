@@ -1,12 +1,17 @@
 import React from 'react'
 import '../styles/globals.css'
-import { ProviderAuth } from '../lib/auth'
+import { AuthProvider } from '../lib/auth'
+import { ThemeProvider, CSSReset } from '@chakra-ui/core'
+import theme from '../theme'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ProviderAuth>
-      <Component {...pageProps} />
-    </ProviderAuth>
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <CSSReset />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </AuthProvider>
   )
 }
 

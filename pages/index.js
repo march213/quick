@@ -1,5 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
+import { Button } from '@chakra-ui/core'
+
 import styles from '../styles/Home.module.css'
 import { useAuth } from '../lib/auth'
 
@@ -16,9 +18,13 @@ export default function Home() {
         <h2>Playing around with stuff</h2>
         <p>{auth?.user?.displayName}</p>
         {auth?.user ? (
-          <button onClick={() => auth.signout()}>Sign out</button>
+          <Button variantColor="pink" variant="outline" onClick={() => auth.signout()}>
+            Sign out
+          </Button>
         ) : (
-          <button onClick={() => auth.signin()}>Sign in</button>
+          <Button variantColor="teal" onClick={() => auth.signin()}>
+            Sign in
+          </Button>
         )}
       </section>
     </div>
