@@ -13,6 +13,7 @@ export default function Home() {
       </Head>
       <section>
         <h1>Quick Feedback</h1>
+        <h2>Playing around with stuff</h2>
         <p>{auth?.user?.displayName}</p>
         {auth?.user ? (
           <button onClick={() => auth.signout()}>Sign out</button>
