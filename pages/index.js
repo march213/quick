@@ -22,8 +22,7 @@ export default function Home() {
         margin="auto"
       >
         <Heading as="h1" size="xl">
-          <Icon name="logo" size="32px" fill="#2F2504" />
-          Quick Feedback
+          <Icon name="logo" size="48px" fill="#2F2504" />
         </Heading>
 
         {auth.user ? (
@@ -42,7 +41,7 @@ export default function Home() {
             </Button>
           </>
         ) : (
-          <Button variantColor="teal" onClick={() => auth.signin()}>
+          <Button variantColor="teal" size="sm" mt={4} onClick={() => auth.signin()}>
             Sign in
           </Button>
         )}
