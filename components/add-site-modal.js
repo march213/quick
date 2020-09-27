@@ -15,10 +15,12 @@ import {
   useToast,
   useDisclosure,
 } from '@chakra-ui/core'
+import { mutate } from 'swr'
+
 import { createSite } from '@/lib/db'
 import { useAuth } from '@/lib/auth'
 
-function AddSiteModal() {
+function AddSiteModal({ variantColor = 'gray', text = 'Add Your First Site' }) {
   const initialRef = React.useRef()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { handleSubmit, register } = useForm()
@@ -26,12 +28,13 @@ function AddSiteModal() {
   const auth = useAuth()
 
   const onCreateSite = (values) => {
-    createSite({
+    const newSite = {
       authorId: auth.user.uid,
       createdAt: new Date().toISOString(),
       ...values,
-    })
-    onClose()
+    }
+    createSite(newSite)
+    mutate('/api/sites', (data) => ({ sites: [...data.sites, newSite] }), false)
     toast({
       title: 'Success!',
       description: "We've added your site",
@@ -39,11 +42,14 @@ function AddSiteModal() {
       duration: 9000,
       isClosable: true,
     })
+    onClose()
   }
 
   return (
     <>
-      <Button onClick={onOpen}>Add your first site</Button>
+      <Button variantColor={variantColor} onClick={onOpen}>
+        {text}
+      </Button>
 
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={initialRef}>
         <ModalOverlay />
@@ -53,7 +59,7 @@ function AddSiteModal() {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Name</FormLabel>
-              <Input ref={register({})} name="site_name" placeholder="My Site" />
+              <Input ref={register({})} name="name" placeholder="My Site" />
             </FormControl>
 
             <FormControl mt={4}>
