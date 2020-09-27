@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
-import { Button, Heading, Text, Avatar, Flex, Box, Icon } from '@chakra-ui/core'
+import Link from 'next/link'
+import { Button, Heading, Flex, Icon } from '@chakra-ui/core'
 
 import { useAuth } from '@/lib/auth'
 
@@ -27,18 +28,11 @@ export default function Home() {
 
         {auth.user ? (
           <>
-            <Flex alignItems="center" marginY={12}>
-              <Avatar name={auth.user.name} marginRight={3} src={auth.user.photoUrl} />
-              <Box>
-                <Text fontSize="lg" fontWeight="bold">
-                  {auth.user.name}
-                </Text>
-                <Text fontSize="md">{auth.user.email}</Text>
-              </Box>
-            </Flex>
-            <Button variantColor="pink" variant="outline" onClick={() => auth.signout()}>
-              Sign out
-            </Button>
+            <Link href="/dashboard">
+              <Button as="a" mt={2}>
+                Go To Dashobard
+              </Button>
+            </Link>
           </>
         ) : (
           <Button variantColor="teal" size="sm" mt={4} onClick={() => auth.signin()}>

@@ -12,22 +12,33 @@ import {
   Heading,
   Button,
 } from '@chakra-ui/core'
+import { useRouter } from 'next/router'
+
 import { useAuth } from '@/lib/auth'
 import AddSiteModal from './add-site-modal'
 
 const DashboardShell = ({ children }) => {
   const auth = useAuth()
+  const router = useRouter()
 
   return (
     <Flex flexDirection="column" height="100vh">
-      <Flex as="nav" justifyContent="space-between" py={4} px={8}>
-        <Flex>
-          <Icon name="logo" color="black" mr={4} mt="-4px" />
+      <Flex as="nav" justify="space-between" alignItems="center" py={4} px={8}>
+        <Flex alignItems="center">
+          <Icon name="logo" color="black" mr={4} />
           <Link mr={4}>Feedback</Link>
           <Link>Sites</Link>
         </Flex>
         <Box display="flex" justifyContent="center" alignItems="center">
-          <Button variant="ghost" mr={2} onClick={() => auth.signout()} fontWeight="400">
+          <Button
+            variant="ghost"
+            mr={2}
+            onClick={() => {
+              auth.signout()
+              router.push('/')
+            }}
+            fontWeight="400"
+          >
             Log Out
           </Button>
           <Avatar size="sm" src={auth.user?.photoUrl} />
