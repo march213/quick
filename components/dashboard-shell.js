@@ -10,12 +10,12 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Heading,
+  Button,
 } from '@chakra-ui/core'
 import { useAuth } from '@/lib/auth'
 
 const DashboardShell = ({ children }) => {
   const auth = useAuth()
-  if (!auth.user) return null
 
   return (
     <Flex flexDirection="column" height="100vh">
@@ -26,8 +26,10 @@ const DashboardShell = ({ children }) => {
           <Link>Sites</Link>
         </Box>
         <Box display="flex" justifyContent="center" alignItems="center">
-          <Link pr={4}>Account</Link>
-          <Avatar size="sm" src={auth.user.photoUrl} />
+          <Button variant="ghost" mr={2} onClick={() => auth.signout()} fontWeight="400">
+            Log Out
+          </Button>
+          <Avatar size="sm" src={auth.user?.photoUrl} />
         </Box>
       </Flex>
       <Flex backgroundColor="gray.100" justifyContent="center" p={8} flexGrow="1">
