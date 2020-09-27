@@ -15,6 +15,8 @@ import {
   useToast,
   useDisclosure,
 } from '@chakra-ui/core'
+import { mutate } from 'swr'
+
 import { createSite } from '@/lib/db'
 import { useAuth } from '@/lib/auth'
 
@@ -26,12 +28,13 @@ function AddSiteModal({ variantColor = 'gray', text = 'Add Your First Site' }) {
   const auth = useAuth()
 
   const onCreateSite = (values) => {
-    createSite({
+    const newSite = {
       authorId: auth.user.uid,
       createdAt: new Date().toISOString(),
       ...values,
-    })
-    onClose()
+    }
+    createSite(newSite)
+    mutate('/api/sites', (data) => ({ sites: [...data.sites, newSite] }), false)
     toast({
       title: 'Success!',
       description: "We've added your site",
@@ -39,6 +42,7 @@ function AddSiteModal({ variantColor = 'gray', text = 'Add Your First Site' }) {
       duration: 9000,
       isClosable: true,
     })
+    onClose()
   }
 
   return (

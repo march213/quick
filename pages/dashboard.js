@@ -1,7 +1,6 @@
 import React from 'react'
 import useSWR from 'swr'
 
-// import { useAuth } from '@/lib/auth'
 import EmptyState from '@/components/empty-state'
 import SiteTableSkeleton from '@/components/site-table-skeleton'
 import SiteTable from '@/components/site-table'
