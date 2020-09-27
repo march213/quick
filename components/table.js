@@ -6,7 +6,7 @@ export const Th = (props) => {
     <Text
       as="th"
       p={4}
-      color="gray.500"
+      color="gray.600"
       fontSize="xs"
       fontWeight="medium"
       textTransform="uppercase"
@@ -33,7 +33,7 @@ export const Tr = (props) => {
     <Box
       as="tr"
       height="40px"
-      backgroundColor="gray.500"
+      backgroundColor="gray.50"
       borderTopLeftRadius={8}
       borderTopRightRadius={8}
       borderBottom="1px solid"
@@ -57,3 +57,15 @@ export const Table = (props) => {
     />
   )
 }
+
+export const TableHeader = () => (
+  <thead>
+    <Tr>
+      <Th>Name</Th>
+      <Th>Site Link</Th>
+      <Th>Feedback Link</Th>
+      <Th>Date Added</Th>
+      <Th>{''}</Th>
+    </Tr>
+  </thead>
+)

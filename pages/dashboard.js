@@ -4,6 +4,7 @@ import useSWR from 'swr'
 // import { useAuth } from '@/lib/auth'
 import EmptyState from '@/components/empty-state'
 import SiteTableSkeleton from '@/components/site-table-skeleton'
+import SiteTable from '@/components/site-table'
 import DashboardShell from '@/components/dashboard-shell'
 import fetcher from '@/utils/fetcher'
 
@@ -18,11 +19,9 @@ function Dashboard() {
     )
   }
 
-  console.log('data', data)
-
   return (
     <DashboardShell>
-      <EmptyState />
+      {data.sites && data.sites.length ? <SiteTable sites={data.sites} /> : <EmptyState />}
     </DashboardShell>
   )
 }
